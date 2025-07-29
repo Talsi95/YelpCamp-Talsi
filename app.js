@@ -20,8 +20,7 @@ const userRoutes = require('./routes/users');
 const campgroundRouts = require('./routes/campgrounds');
 const reviewRouts = require('./routes/reviews');
 
-const dbUrl = process.env.DB_URL;
-//'mongodb://localhost:27017/yelp-camp'
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp';
 mongoose.connect(dbUrl);
 
 const db = mongoose.connection;
@@ -44,7 +43,7 @@ app.use(mongoSanitize({
 }));
 
 const store = new MongoDBStore({
-    url: 'mongodb://localhost:27017/yelp-camp',
+    url: dbUrl,
     secret: 'imgoodandimfeelingalright',
     touchAfter: 24 * 60 * 60,
 });
