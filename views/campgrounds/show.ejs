@@ -1,7 +1,7 @@
 <% layout('/layouts/boilerplate') %>
     <link rel="stylesheet" href="/stylesheets/stars.css">
     <div class="row">
-        <div class="col-6">
+        <div class="col-12 col-md-6">
             <div id="campgroundCarousel" class="carousel slide">
                 <div class="carousel-inner">
                     <% campground.images.forEach((img, i)=> { %>
@@ -41,7 +41,7 @@
                     </li>
                     <li class="list-group-item">$<%= campground.price %>/night</li>
                 </ul>
-                <% if(currentUser && campground.author.equals(currentUser._id)) { %>
+                <% if ((currentUser && campground.author.equals(currentUser._id)) || isAdmin) { %>
                     <div class="card-body">
                         <a href="/campgrounds/<%= campground._id %>/edit" class="card-link btn btn-info">Edit</a>
                         <form class="d-inline" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
@@ -54,7 +54,7 @@
                         </div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-md-6">
             <div id="map"></div>
             <% if (currentUser) { %>
                 <h2>Leave a Review</h2>
@@ -98,7 +98,7 @@
                                 </p>
                                 <p class="card-text">Review: <%= review.body %>
                                 </p>
-                                <% if(currentUser && review.author.equals(currentUser._id)) { %>
+                                <% if ((currentUser && campground.author.equals(currentUser._id)) || isAdmin) { %>
                                     <form
                                         action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE"
                                         method="POST">

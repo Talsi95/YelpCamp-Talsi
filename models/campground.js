@@ -54,9 +54,6 @@ campgroundSchema.post('findOneAndDelete', async function (doc) {
                 $in: doc.reviews
             }
         })
-
     }
-
-
 })
 module.exports = mongoose.model('Campground', campgroundSchema);

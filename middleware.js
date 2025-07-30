@@ -54,3 +54,10 @@ module.exports.validateReview = (req, res, next) => {
         next();
     }
 }
+module.exports.isAdmin = (req, res, next) => {
+    if (!req.user || !req.user.isAdmin) {
+        req.flash('error', 'You do not have permission to do that');
+        return res.redirect('/campgrounds');
+    }
+    next();
+}

@@ -1,0 +1,35 @@
+<% layout('layouts/boilerplate')%>
+    <% for (let campground of campgrounds) { %>
+        <div class="card mb-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="img-fluid" src="<%= campground.images[0].url %>">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= campground.title %>
+                        </h5>
+                        <p class="card-text">
+                            <%= campground.description %>
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                <%= campground.location %>
+                            </small>
+                        </p>
+                        <a class="btn btn-primary" href="/campgrounds/<%= campground._id %>">View <%= campground.title
+                                %></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+            <% for (let user of users) { %>
+                <p>
+                    <%= user.username %>
+                </p>
+                <form method="POST" action="/users/<%= user._id %>?_method=DELETE" class="d-inline">
+      <button class="btn btn-danger btn-sm">Delete User</button>
+  </form>
+                <% } %>

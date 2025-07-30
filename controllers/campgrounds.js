@@ -2,10 +2,16 @@ const Campground = require('../models/campground');
 const maptilerClient = require("@maptiler/client");
 maptilerClient.config.apiKey = process.env.MAPTILER_API_KEY;
 const { cloudinary } = require('../cloudinary');
+const User = require('../models/user');
 
 module.exports.index = async (req, res) => {
     const campgrounds = await Campground.find({});
     res.render('campgrounds/index', { campgrounds })
+}
+module.exports.admincampgrounds = async (req, res) => {
+    const campgrounds = await Campground.find({})
+    const users = await User.find({});
+    res.render('campgrounds/admin', { campgrounds, users });
 }
 module.exports.renderNewForm = (req, res) => {
     res.render('campgrounds/new')

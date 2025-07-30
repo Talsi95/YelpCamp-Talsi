@@ -35,3 +35,9 @@ module.exports.logout = (req, res, next) => {
         res.redirect('/campgrounds');
     });
 }
+module.exports.deleteUser = async (req, res) => {
+    const {id} = req.params;
+    await User.findByIdAndDelete(id);
+    req.flash('success', 'Successfully Deleted User');
+    res.redirect('/campgrounds/admin');
+}
